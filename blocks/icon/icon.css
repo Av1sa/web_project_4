@@ -1,0 +1,9 @@
+@import url(./_add/icon_add.css);
+@import url(./_close/icon_close.css);
+@import url(./_edit/icon_edit.css);
+
+.icon {
+  fill: white;
+  margin: 0;
+  padding: 0;
+}

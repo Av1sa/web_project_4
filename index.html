@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Around The U.S.</title>
+  <link rel="stylesheet" href="./pages/index.css">
+</head>
+<body class="page">
+  
+  <!-- Header -->
+  <header class="header">
+    <img src="./images/logo.svg" alt="Logo" class="header__logo">
+  </header>
+
+  <!-- Profile Section -->
+  <section class="profile">
+    <img src="./images/cousteau.jpg" alt="Avatar Pic" class="profile__avatar">
+    <div>
+      <div class="profile__name-container">
+        <h1 class="profile__name">Jacques Cousteau</h1>
+        <button class="button button_edit">
+          <svg class="icon icon_edit" viewBox="0 0 10 10">
+            <path d="M10 1.32827L2.60377 8.7666L1.28302 7.41936L8.66038 0L10 1.32827ZM0 10L1.96226 9.41177L0.584906 8.08349L0 10Z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="profile__description">Explorer</div>
+    </div>
+    <button class="button button_add">
+      <svg class="icon icon_add" viewBox="0 0 24 24">
+        <path d="M22 9.77778H12.2222V0H9.77778V9.77778H0V12.2222H9.77778V22H12.2222V12.2222H22V9.77778Z"/>
+      </svg>
+    </but>
+
+  <!-- Cards Section -->  
+  </section>
+  <section class="elements">
+    <ul class="cards">
+      <li class="card">
+        <img src="./images/yosemite.jpg" alt="Pic: Yosemite Valley" class="card__image">
+        <div class="card__text-container">
+          <p class="card__text">Yosemite Valley</p>
+          <img src="./images/like_icon.svg" alt="Like Icon" class="card__like-btn">
+        </div>
+      </li>
+      <li class="card">
+        <img src="./images/lake-louise.png" alt="Pic: Lake Louise" class="card__image">
+        <div class="card__text-container">
+          <p class="card__text">Lake Louise</p>
+          <img src="./images/like_icon.svg" alt="Like Icon" class="card__like-btn">
+        </div>
+      </li><li class="card">
+        <img src="./images/bald-mountains.png" alt="Pic: Bald Mountains" class="card__image">
+        <div class="card__text-container">
+          <p class="card__text">Bald Mountains</p>
+          <img src="./images/like_icon.svg" alt="Like Icon" class="card__like-btn">
+        </div>
+      </li><li class="card">
+        <img src="./images/latemar.png" alt="Pic: Latemar" class="card__image">
+        <div class="card__text-container">
+          <p class="card__text">Latemar</p>
+          <img src="./images/like_icon.svg" alt="Like Icon" class="card__like-btn">
+        </div>
+      </li><li class="card">
+        <img src="./images/vanois.png" alt="Pic: Vanois National" class="card__image">
+        <div class="card__text-container">
+          <p class="card__text">Vanois National</p>
+          <img src="./images/like_icon.svg" alt="Like Icon" class="card__like-btn">
+        </div>
+      </li><li class="card">
+        <img src="./images/braies.png" alt="Pic: Lago di Braies" class="card__image">
+        <div class="card__text-container">
+          <p class="card__text">Lago di Braies</p>
+          <img src="./images/like_icon.svg" alt="Like Icon" class="card__like-btn">
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Popup Window Section -->
+  <section class="popup">
+    <div class="popup__container">
+      <form action="submit" class="popup__form">
+        <h2 class="popup__title">Edit profile</h2>
+        <input type="text" placeholder="Enter Name" class="popup__input popup__input_name">
+        <input type="text" placeholder="Enter Job" class="popup__input popup__input_job">
+        <button type="submit" class="button button_save">Save</button>
+      </form>
+      <button class="button button_close">
+          <svg class="icon icon_close" viewbox="0 0 45 45">
+            <path d="M44.7661 41.5683L31.9759 28.778L44.7661 15.9878L41.5686 12.7902L28.7783 25.5805L15.9881 12.7902L12.7905 15.9878L25.5808 28.778L12.7905 41.5683L15.9881 44.7658L28.7783 31.9756L41.5686 44.7658L44.7661 41.5683Z"/>
+          </svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="footer__text">© 2020 Around The U.S.</p>
+  </footer>
+
+  <!-- JS -->
+  <script src="./js/script.js"></script>
+
+</body>
+</html>

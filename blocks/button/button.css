@@ -1,0 +1,17 @@
+@import url(./_add/button_add.css);
+@import url(./_close/button_close.css);
+@import url(./_edit/button_edit.css);
+@import url(./_save/button_save.css);
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+  margin: 0;
+  padding: 0;
+}
+
+.button:hover .icon {
+  fill: rgba(255, 255, 255, 0.6);
+}

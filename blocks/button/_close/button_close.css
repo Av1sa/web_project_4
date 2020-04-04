@@ -1,0 +1,18 @@
+.button_close {
+  background: none;
+  position: absolute;
+  border: none;
+  top: -41px;
+  right: -41px;
+}
+
+.button_close:hover {
+  cursor: pointer;
+}
+
+@media(max-width: 500px) {
+  .button_close {
+    top: -30px;
+    right: -30px;
+  }
+}

@@ -1,0 +1,17 @@
+@import url(./__image/card__image.css);
+@import url(./__text-container/card__text-container.css);
+@import url(./__text/card__text.css);
+
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+  background: white;
+}
+
+@media(max-width: 500px) {
+  .card:nth-child(5),
+  .card:nth-child(6)
+  {
+    display: none;
+  }
+}
