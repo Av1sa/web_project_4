@@ -1,6 +1,7 @@
 @import url(./_add/icon_add.css);
 @import url(./_close/icon_close.css);
 @import url(./_edit/icon_edit.css);
+@import url(./_like/icon_like.css);
 
 .icon {
   fill: white;
