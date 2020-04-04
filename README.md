@@ -7,6 +7,3 @@ Responsive design
 
 You can edit the name and the description in the profile section.
 
-Github Pages: 
-
-
