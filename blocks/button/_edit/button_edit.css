@@ -1,13 +1,8 @@
 .button_edit {
   width: 24px;
   height: 24px;
-  background: black;
+  background: black url(../../../images/edit_icon.svg) center no-repeat;
   border: 1px solid white;
-}
-
-.button_edit:hover {
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  cursor: pointer;
 }
 
 @media(max-width: 500px) {

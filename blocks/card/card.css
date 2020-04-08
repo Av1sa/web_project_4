@@ -7,11 +7,3 @@
   overflow: hidden;
   background: white;
 }
-
-@media(max-width: 500px) {
-  .card:nth-child(5),
-  .card:nth-child(6)
-  {
-    display: none;
-  }
-}

@@ -14,13 +14,13 @@ let jobInput = document.querySelector('.popup__input_job');
 
 
 editButton.addEventListener('click', function(){
-  popup.classList.add('popup_opened');
+  popup.classList.toggle('popup_opened');
   nameInput.value = name.textContent;
   jobInput.value = job.textContent;
 });
 
 closeButton.addEventListener('click', function(){
-  popup.classList.remove('popup_opened');
+  popup.classList.toggle('popup_opened');
 });
 
 form.addEventListener('submit', function(e){
