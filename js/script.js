@@ -14,14 +14,12 @@ let jobInput = document.querySelector('.popup__input_job');
 
 
 editButton.addEventListener('click', function(){
-  popup.classList.toggle('popup_opened');
+  toggleEditForm();
   nameInput.value = name.textContent;
   jobInput.value = job.textContent;
 });
 
-closeButton.addEventListener('click', function(){
-  popup.classList.toggle('popup_opened');
-});
+closeButton.addEventListener('click', toggleEditForm);
 
 form.addEventListener('submit', function(e){
   if (nameInput.value !== '' && jobInput.value !== '') {
@@ -31,4 +29,8 @@ form.addEventListener('submit', function(e){
   e.preventDefault();
 });
 
+// Show/hide edit form
+function toggleEditForm() {
+  popup.classList.toggle('popup_opened');
+}
 

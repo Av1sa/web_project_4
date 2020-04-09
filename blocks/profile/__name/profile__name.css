@@ -10,7 +10,7 @@
 @media (max-width: 800px) {
   .profile__name {
     text-align: center;
-    margin: 14px 12px 14px 0;
+    margin: 14px 12px 0 0;
   }
 }
 

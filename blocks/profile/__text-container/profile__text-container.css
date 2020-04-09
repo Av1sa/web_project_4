@@ -1,8 +1,10 @@
 .profile__text-container {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   flex-wrap: wrap;
   max-width: 450px;
+  margin: 0;
+  padding: 0;
 }
 
 @media (max-width: 800px) {
