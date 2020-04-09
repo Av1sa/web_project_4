@@ -8,4 +8,4 @@ Responsive design
 You can edit the name and the description in the profile section.
 
 GitHub Pages:  
-https://github.com/Av1sa/web_project_4
+https://av1sa.github.io/web_project_4/index.html
