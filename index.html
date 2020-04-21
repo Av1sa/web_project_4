@@ -28,62 +28,14 @@
     <!-- Cards Section -->  
     <section class="elements">
       <ul class="cards">
-
-        <li class="card">
-          <img src="./images/yosemite.jpg" alt="Pic: Yosemite Valley" class="card__image">
-          <div class="card__text-container">
-            <p class="card__text">Yosemite Valley</p>
-            <button class="button button_like"></button>
-          </div>
-        </li>
-
-        <li class="card">
-          <img src="./images/lake-louise.png" alt="Pic: Lake Louise" class="card__image">
-          <div class="card__text-container">
-            <p class="card__text">Lake Louise</p>
-            <button class="button button_like"></button>
-          </div>
-        </li>
-        
-        <li class="card">
-          <img src="./images/bald-mountains.png" alt="Pic: Bald Mountains" class="card__image">
-          <div class="card__text-container">
-            <p class="card__text">Bald Mountains</p>
-            <button class="button button_like"></button>
-          </div>
-        </li>
-        
-        <li class="card">
-          <img src="./images/latemar.png" alt="Pic: Latemar" class="card__image">
-          <div class="card__text-container">
-            <p class="card__text">Latemar</p>
-            <button class="button button_like"></button>
-          </div>
-        </li>
-        
-        <li class="card">
-          <img src="./images/vanois.png" alt="Pic: Vanois National" class="card__image">
-          <div class="card__text-container">
-            <p class="card__text">Vanois National</p>
-            <button class="button button_like"></button>
-          </div>
-        </li>
-        
-        <li class="card">
-          <img src="./images/braies.png" alt="Pic: Lago di Braies" class="card__image">
-          <div class="card__text-container">
-            <p class="card__text">Lago di Braies</p>
-            <button class="button button_like"></button>
-          </div>
-        </li>
-        
+        <!-- Cards added dynamically -->
       </ul>
     </section>
 
-    <!-- Popup Window Section -->
-    <section class="popup">
+    <!-- Popup Details Form -->
+    <section class="popup popup_details">
       <div class="popup__container">
-        <form action="submit" class="popup__form">
+        <form class="popup__form">
           <h2 class="popup__title">Edit profile</h2>
           <input type="text" placeholder="Enter Name" class="popup__input popup__input_name">
           <input type="text" placeholder="Enter Job" class="popup__input popup__input_job">
@@ -92,12 +44,40 @@
         <button class="button button_close"></button>
       </div>
     </section>
+
+    <!-- Popup New Card -->
+    <section class="popup popup_new-place">
+      <div class="popup__container">
+        <form class="popup__form">
+          <h2 class="popup__title">New place</h2>
+          <input type="text" placeholder="Title" class="popup__input popup__input_name">
+          <input type="text" placeholder="Image link" class="popup__input popup__input_job">
+          <button type="submit" class="button button_save">Create</button>
+        </form>
+        <button class="button button_close"></button>
+      </div>
+    </section>
+
   </main>
+
+  
   
   <!-- Footer -->
   <footer class="footer">
     <p class="footer__text">© 2020 Around The U.S.</p>
   </footer>
+
+  <!-- Card Template -->
+  <template id="card">
+      <li class="card">
+        <img src="" alt="" class="card__image">
+        <div class="card__text-container">
+          <p class="card__text"></p>
+          <button class="button button_like"></button>
+        </div>
+        <button class="button button_delete"></button>
+      </li>
+  </template>
 
   <!-- JS -->
   <script src="./js/script.js"></script>
