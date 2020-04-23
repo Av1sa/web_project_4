@@ -27,40 +27,24 @@
 
     <!-- Cards Section -->  
     <section class="elements">
-      <ul class="cards">
-        <!-- Cards added dynamically -->
-      </ul>
+      <!-- Cards added dynamically -->
+      <ul class="cards"></ul>
     </section>
 
-    <!-- Popup Details Form -->
-    <section class="popup popup_details">
-      <div class="popup__container">
-        <form class="popup__form">
-          <h2 class="popup__title">Edit profile</h2>
-          <input type="text" placeholder="Enter Name" class="popup__input popup__input_name">
-          <input type="text" placeholder="Enter Job" class="popup__input popup__input_job">
-          <button type="submit" class="button button_save">Save</button>
-        </form>
-        <button class="button button_close"></button>
-      </div>
+    <!-- Popup Images -->
+    <section class="popup-image">
+      <!-- Popup images added dynamically -->
+      <div class="popup popup_image"></div>
     </section>
 
-    <!-- Popup New Card -->
-    <section class="popup popup_new-place">
-      <div class="popup__container">
-        <form class="popup__form">
-          <h2 class="popup__title">New place</h2>
-          <input type="text" placeholder="Title" class="popup__input popup__input_name">
-          <input type="text" placeholder="Image link" class="popup__input popup__input_job">
-          <button type="submit" class="button button_save">Create</button>
-        </form>
-        <button class="button button_close"></button>
-      </div>
+    <!-- Popup Forms -->
+    <section class="popup-forms">
+      <!-- Popups added dynamically -->
+      <div class="popup popup_details"></div>
+      <div class="popup popup_new-place"></div>
     </section>
 
   </main>
-
-  
   
   <!-- Footer -->
   <footer class="footer">
@@ -70,13 +54,35 @@
   <!-- Card Template -->
   <template id="card">
       <li class="card">
-        <img src="" alt="" class="card__image">
+        <img class="card__image">
         <div class="card__text-container">
           <p class="card__text"></p>
           <button class="button button_like"></button>
         </div>
         <button class="button button_delete"></button>
       </li>
+  </template>
+
+  <!-- Popup Form Template -->
+  <template id="popup-form">
+    <div class="popup__container popup__container_form">
+      <form class="popup__form">
+        <h2 class="popup__title"></h2>
+        <input type="text" class="popup__input popup__input_name">
+        <input type="text" class="popup__input popup__input_desc">
+        <button type="submit" class="button button_save"></button>
+      </form>
+      <button class="button button_close"></button>
+    </div>
+  </template>
+
+  <!-- Popup Image Template -->
+  <template id="popup-image">
+    <div class="popup__container popup__container_image">
+      <img class="popup__image">
+      <h2 class="popup__image-title"></h2>
+      <button class="button button_close"></button>
+    </div>
   </template>
 
   <!-- JS -->

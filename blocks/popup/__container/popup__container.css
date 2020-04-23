@@ -1,17 +1,7 @@
+@import url(./_form/popup__container_form.css);
+@import url(./_image/popup__container_image.css);
+
 .popup__container {
-  background: white;
-  color: black;
-  box-shadow: 0px 0px 25px rgba(121, 52, 52, 0.15);
-  border-radius: 10px;
-  padding: 36px;
-  margin: 0;
-  width: calc(100% - 150px);
-  max-width: 430px;
   position: relative;
 }
 
-@media(max-width: 500px) {
-  .popup__container {
-    padding: 20px;
-  }
-}
