@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
   <title>Around The U.S.</title>
   <link rel="stylesheet" href="./pages/index.css">
 </head>
+
 <body class="page">
-  
+
   <!-- Header -->
   <header class="header">
     <img src="./images/logo.svg" alt="Logo" class="header__logo">
@@ -22,71 +24,77 @@
         <button class="button button_edit"></button>
         <p class="profile__description">Explorer</p>
       </div>
-      <button class="button button_add"></button>  
+      <button class="button button_add"></button>
     </section>
 
-    <!-- Cards Section -->  
+    <!-- Cards Section -->
     <section class="elements">
       <!-- Cards added dynamically -->
       <ul class="cards"></ul>
     </section>
 
-    <!-- Popup Images -->
-    <section class="popup-image">
-      <!-- Popup images added dynamically -->
-      <div class="popup popup_image"></div>
-    </section>
-
-    <!-- Popup Forms -->
+    <!-- Popups -->
     <section class="popup-forms">
-      <!-- Popups added dynamically -->
-      <div class="popup popup_details"></div>
-      <div class="popup popup_new-place"></div>
+      
+      <!-- Edit Profile Form -->
+      <div class="popup popup_edit-profile">
+        <div class="popup__container popup__container_form">
+          <form class="popup__form">
+            <h2 class="popup__title">Edit profile</h2>
+            <input type="text" class="popup__input popup__input_name" placeholder="Edit Name">
+            <input type="text" class="popup__input popup__input_desc" placeholder="Edit Job">
+            <button type="submit" class="button button_save">Save</button>
+          </form>
+          <button class="button button_close"></button>
+        </div>
+      </div>
+
+      <!-- Add New Place Form -->
+      <div class="popup popup_new-place">
+        <div class="popup__container popup__container_form">
+          <form class="popup__form">
+            <h2 class="popup__title">New Place</h2>
+            <input type="text" class="popup__input popup__input_name" placeholder="Title">
+            <input type="url" class="popup__input popup__input_link" placeholder="Image Link">
+            <button type="submit" class="button button_save">Create</button>
+          </form>
+          <button class="button button_close"></button>
+        </div>
+      </div>
+
+      <!-- Popup Image -->
+      <div class="popup popup_image">
+        <div class="popup__container">
+          <img class="popup__image">
+          <h2 class="popup__image-title"></h2>
+          <button class="button button_close"></button>
+        </div>
+      </div>
+
     </section>
 
   </main>
-  
+
   <!-- Footer -->
   <footer class="footer">
     <p class="footer__text">© 2020 Around The U.S.</p>
   </footer>
 
   <!-- Card Template -->
-  <template id="card">
-      <li class="card">
-        <img class="card__image">
-        <div class="card__text-container">
-          <p class="card__text"></p>
-          <button class="button button_like"></button>
-        </div>
-        <button class="button button_delete"></button>
-      </li>
-  </template>
-
-  <!-- Popup Form Template -->
-  <template id="popup-form">
-    <div class="popup__container popup__container_form">
-      <form class="popup__form">
-        <h2 class="popup__title"></h2>
-        <input type="text" class="popup__input popup__input_name">
-        <input type="text" class="popup__input popup__input_desc">
-        <button type="submit" class="button button_save"></button>
-      </form>
-      <button class="button button_close"></button>
-    </div>
-  </template>
-
-  <!-- Popup Image Template -->
-  <template id="popup-image">
-    <div class="popup__container popup__container_image">
-      <img class="popup__image">
-      <h2 class="popup__image-title"></h2>
-      <button class="button button_close"></button>
-    </div>
+  <template class="template-card">
+    <li class="card">
+      <img class="card__image">
+      <div class="card__text-container">
+        <p class="card__text"></p>
+        <button class="button button_like"></button>
+      </div>
+      <button class="button button_delete"></button>
+    </li>
   </template>
 
   <!-- JS -->
   <script src="./js/script.js"></script>
-
+  
 </body>
+
 </html>

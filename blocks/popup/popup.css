@@ -12,16 +12,16 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0;
   left: 0;
+  transition: opacity .3s linear;
 }
 
-.popup_opened {
+.popup_is-opened {
   visibility: visible;
   opacity: 1;
-  transition: opacity .5s linear;
 }
 
 .popup_image {
