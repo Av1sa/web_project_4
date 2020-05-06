@@ -1,100 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <title>Around The U.S.</title>
+    <link rel="stylesheet" href="./pages/index.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-  <title>Around The U.S.</title>
-  <link rel="stylesheet" href="./pages/index.css">
-</head>
+  <body class="page">
+    <!-- Header -->
+    <header class="header">
+      <img src="./images/logo.svg" alt="Logo" class="header__logo" />
+    </header>
 
-<body class="page">
-
-  <!-- Header -->
-  <header class="header">
-    <img src="./images/logo.svg" alt="Logo" class="header__logo">
-  </header>
-
-  <main>
-    <!-- Profile Section -->
-    <section class="profile">
-      <img src="./images/cousteau.jpg" alt="Avatar Pic" class="profile__avatar">
-      <div class="profile__text-container">
-        <h1 class="profile__name">Jacques Cousteau</h1>
-        <button class="button button_edit"></button>
-        <p class="profile__description">Explorer</p>
-      </div>
-      <button class="button button_add"></button>
-    </section>
-
-    <!-- Cards Section -->
-    <section class="elements">
-      <!-- Cards added dynamically -->
-      <ul class="cards"></ul>
-    </section>
-
-    <!-- Popups -->
-    <section class="popup-forms">
-      
-      <!-- Edit Profile Form -->
-      <div class="popup popup_edit-profile">
-        <div class="popup__container popup__container_form">
-          <form class="popup__form">
-            <h2 class="popup__title">Edit profile</h2>
-            <input type="text" class="popup__input popup__input_name" placeholder="Edit Name">
-            <input type="text" class="popup__input popup__input_desc" placeholder="Edit Job">
-            <button type="submit" class="button button_save">Save</button>
-          </form>
-          <button class="button button_close"></button>
+    <main>
+      <!-- Profile Section -->
+      <section class="profile">
+        <img
+          src="./images/cousteau.jpg"
+          alt="Avatar Pic"
+          class="profile__avatar"
+        />
+        <div class="profile__text-container">
+          <h1 class="profile__name">Jacques Cousteau</h1>
+          <button class="button button_edit"></button>
+          <p class="profile__description">Explorer</p>
         </div>
-      </div>
+        <button class="button button_add"></button>
+      </section>
 
-      <!-- Add New Place Form -->
-      <div class="popup popup_new-place">
-        <div class="popup__container popup__container_form">
-          <form class="popup__form">
-            <h2 class="popup__title">New Place</h2>
-            <input type="text" class="popup__input popup__input_name" placeholder="Title">
-            <input type="url" class="popup__input popup__input_link" placeholder="Image Link">
-            <button type="submit" class="button button_save">Create</button>
-          </form>
-          <button class="button button_close"></button>
+      <!-- Cards Section -->
+      <section class="elements">
+        <!-- Cards added dynamically -->
+        <ul class="cards"></ul>
+      </section>
+
+      <!-- Popups -->
+      <section class="popup-forms">
+        <!-- Edit Profile Form -->
+        <div class="popup popup_edit-profile">
+          <div class="popup__container popup__container_form">
+            <form class="popup__form" novalidate>
+              <h2 class="popup__title">Edit profile</h2>
+              <label class="popup__field">
+                <input
+                  type="text"
+                  class="popup__input popup__input_name"
+                  placeholder="Edit Name"
+                  minlength="2"
+                  maxlength="40"
+                  pattern="[A-Za-z -]+"
+                  required
+                  id="name-input"
+                />
+                <span id="name-input-error" class="popup__input-error"></span>
+              </label>
+              <label class="popup__field">
+                <input
+                  type="text"
+                  class="popup__input popup__input_desc"
+                  placeholder="Edit Job"
+                  minlength="2"
+                  maxlength="200"
+                  required
+                  id="desc-input"
+                />
+                <span class="popup__input-error" id="desc-input-error"></span>
+              </label>
+              <button type="submit" class="button button_save">Save</button>
+            </form>
+            <button class="button button_close"></button>
+          </div>
         </div>
-      </div>
 
-      <!-- Popup Image -->
-      <div class="popup popup_image">
-        <div class="popup__container">
-          <img class="popup__image">
-          <h2 class="popup__image-title"></h2>
-          <button class="button button_close"></button>
+        <!-- Add New Place Form -->
+        <div class="popup popup_new-place">
+          <div class="popup__container popup__container_form">
+            <form class="popup__form" novalidate>
+              <h2 class="popup__title">New Place</h2>
+              <label class="popup__field">
+                <input
+                  type="text"
+                  class="popup__input popup__input_name"
+                  placeholder="Title"
+                  minlength="1"
+                  maxlength="30"
+                  required
+                  id="title-input"
+                />
+                <span class="popup__input-error" id="title-input-error"></span>
+              </label>
+              <label class="popup__field">
+                <input
+                  type="url"
+                  class="popup__input popup__input_link"
+                  placeholder="Image Link"
+                  required
+                  id="link-input"
+                />
+                <span class="popup__input-error" id="link-input-error"></span>
+              </label>
+              <button type="submit" class="button button_save">Create</button>
+            </form>
+            <button class="button button_close"></button>
+          </div>
         </div>
-      </div>
 
-    </section>
+        <!-- Popup Image -->
+        <div class="popup popup_image">
+          <div class="popup__container">
+            <img class="popup__image" />
+            <h2 class="popup__image-title"></h2>
+            <button class="button button_close"></button>
+          </div>
+        </div>
+      </section>
+    </main>
 
-  </main>
+    <!-- Footer -->
+    <footer class="footer">
+      <p class="footer__text">© 2020 Around The U.S.</p>
+    </footer>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <p class="footer__text">© 2020 Around The U.S.</p>
-  </footer>
+    <!-- Card Template -->
+    <template class="template-card">
+      <li class="card">
+        <img class="card__image" />
+        <div class="card__text-container">
+          <p class="card__text"></p>
+          <button class="button button_like"></button>
+        </div>
+        <button class="button button_delete"></button>
+      </li>
+    </template>
 
-  <!-- Card Template -->
-  <template class="template-card">
-    <li class="card">
-      <img class="card__image">
-      <div class="card__text-container">
-        <p class="card__text"></p>
-        <button class="button button_like"></button>
-      </div>
-      <button class="button button_delete"></button>
-    </li>
-  </template>
-
-  <!-- JS -->
-  <script src="./js/script.js"></script>
-  
-</body>
-
+    <!-- JS -->
+    <script src="./js/script.js"></script>
+    <script src="./js/validate.js"></script>
+  </body>
 </html>

@@ -1,8 +1,10 @@
 @import url(./__container/popup__container.css);
 @import url(./__input/popup__input.css);
+@import url(./__input-error/popup__input-error.css);
 @import url(./__title/popup__title.css);
 @import url(./__image/popup__image.css);
 @import url(./__image-title/popup__image-title.css);
+@import url(./__field/popup__field.css);
 
 .popup {
   display: flex;
