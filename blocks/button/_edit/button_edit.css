@@ -1,8 +1,8 @@
 .button_edit {
   width: 24px;
   height: 24px;
-  background: black url(../../../images/edit_icon.svg) center no-repeat;
-  border: 1px solid white;
+  background: #000000 url(../../../images/edit_icon.svg) center no-repeat;
+  border: 1px solid #FFFFFF;
 }
 
 @media(max-width: 500px) {

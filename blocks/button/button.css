@@ -1,11 +1,11 @@
-@import url(./_add/button_add.css);
-@import url(./_close/button_close.css);
-@import url(./_edit/button_edit.css);
-@import url(./_save/button_save.css);
-@import url(./_save-inactive/button_save-inactive.css);
-@import url(./_like/button_like.css);
-@import url(./_like-black/button_like-black.css);
-@import url(./_delete/button_delete.css);
+@import url('./_add/button_add.css');
+@import url('./_close/button_close.css');
+@import url('./_edit/button_edit.css');
+@import url('./_save/button_save.css');
+@import url('./_save-inactive/button_save-inactive.css');
+@import url('./_like/button_like.css');
+@import url('./_like-black/button_like-black.css');
+@import url('./_delete/button_delete.css');
 
 .button {
   border-radius: 2px;
@@ -14,6 +14,6 @@
 }
 
 .button:hover {
-  opacity: 0.6;
+  opacity: .6;
   cursor: pointer;
 }

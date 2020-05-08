@@ -26,6 +26,10 @@ const initialCards = [
   },
 ];
 
+//Error image
+const errorImageLink =
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTDDxuIkubELpYS3h54VsoXlcOGeMwwe0Plrx4cHH272FNDc366&usqp=CAU";
+
 //Selectors
 const selectors = {
   cardTemplateSelector: ".template-card",
@@ -55,83 +59,88 @@ const selectors = {
   popupImageTitleSelector: ".popup__image-title",
 };
 
+//Find element in DOM
+const findElement = (parent, selector) => {
+  return parent.querySelector(selector);
+};
+
 //Templates
 const cardTemplate = document
   .querySelector(selectors.cardTemplateSelector)
   .content.querySelector(selectors.cardElementSelector);
 
 //Wrappers
-const cardsContainer = document.querySelector(selectors.cardsWrapperSelector);
-const popupImageContainer = document.querySelector(
-  selectors.imagePopupSelector
-);
+const cardsContainer = findElement(document, selectors.cardsWrapperSelector);
+const popupImageContainer = findElement(document, selectors.imagePopupSelector);
 
 //Popups
-const editProfilePopup = document.querySelector(selectors.profilePopupSelector);
-const newPlacePopup = document.querySelector(selectors.newPlacePopupSelector);
-const imagePopup = document.querySelector(selectors.imagePopupSelector);
+const editProfilePopup = findElement(document, selectors.profilePopupSelector);
+const newPlacePopup = findElement(document, selectors.newPlacePopupSelector);
+const imagePopup = findElement(document, selectors.imagePopupSelector);
 
 //Buttons
-const editProfileBtn = document.querySelector(selectors.editBtnSelector);
-const newPlaceBtn = document.querySelector(selectors.addBtnSelector);
-const closeEditProfileBtn = editProfilePopup.querySelector(
+const editProfileBtn = findElement(document, selectors.editBtnSelector);
+const newPlaceBtn = findElement(document, selectors.addBtnSelector);
+const closeEditProfileBtn = findElement(
+  editProfilePopup,
   selectors.closeBtnSelector
 );
-const closeNewPlaceBtn = newPlacePopup.querySelector(
-  selectors.closeBtnSelector
-);
-const saveEditProfileBtn = editProfilePopup.querySelector(
+const closeNewPlaceBtn = findElement(newPlacePopup, selectors.closeBtnSelector);
+const saveEditProfileBtn = findElement(
+  editProfilePopup,
   selectors.saveBtnSelector
 );
-const createNewPlaceBtn = newPlacePopup.querySelector(
-  selectors.saveBtnSelector
-);
-const closeImagePopupBtn = imagePopup.querySelector(selectors.closeBtnSelector);
+const createNewPlaceBtn = findElement(newPlacePopup, selectors.saveBtnSelector);
+const closeImagePopupBtn = findElement(imagePopup, selectors.closeBtnSelector);
 
 //Popup Fileds
-const nameProfileInput = editProfilePopup.querySelector(
+const nameProfileInput = findElement(
+  editProfilePopup,
   selectors.nameInputSelector
 );
-const jobProfileInput = editProfilePopup.querySelector(
+const jobProfileInput = findElement(
+  editProfilePopup,
   selectors.descInputSelector
 );
-const nameNewPlaceInput = newPlacePopup.querySelector(
+const nameNewPlaceInput = findElement(
+  newPlacePopup,
   selectors.nameInputSelector
 );
-const linkNewPlaceInput = newPlacePopup.querySelector(
+const linkNewPlaceInput = findElement(
+  newPlacePopup,
   selectors.linkInputSelector
 );
 
 //Profile fields
-const name = document.querySelector(selectors.nameProfileSelector);
-const job = document.querySelector(selectors.descProfileSelector);
-
-
+const name = findElement(document, selectors.nameProfileSelector);
+const job = findElement(document, selectors.descProfileSelector);
 
 //Open edit profile popup
-editProfileBtn.addEventListener("click", (e) => {
+editProfileBtn.addEventListener("click", () => {
   nameProfileInput.value = name.textContent;
   jobProfileInput.value = job.textContent;
   togglePopup(editProfilePopup);
+  closePopupOnEscape();
 });
 
 //Open new place popup
-newPlaceBtn.addEventListener("click", (e) => {
+newPlaceBtn.addEventListener("click", () => {
   togglePopup(newPlacePopup);
+  closePopupOnEscape();
 });
 
 //Close profile popup
-closeEditProfileBtn.addEventListener("click", (e) => {
+closeEditProfileBtn.addEventListener("click", () => {
   togglePopup(editProfilePopup);
 });
 
 //Close new place popup
-closeNewPlaceBtn.addEventListener("click", (e) => {
+closeNewPlaceBtn.addEventListener("click", () => {
   togglePopup(newPlacePopup);
 });
 
 //Close image popup
-closeImagePopupBtn.addEventListener("click", (e) => {
+closeImagePopupBtn.addEventListener("click", () => {
   togglePopup(imagePopup);
 });
 
@@ -152,6 +161,7 @@ createNewPlaceBtn.addEventListener("click", (e) => {
 
 // Render card
 function renderCard(name, link) {
+  console.log(cardsContainer);
   prependNode(cardsContainer, addCard(name, link));
 }
 
@@ -164,8 +174,12 @@ function togglePopup(popup) {
 function addCard(name, link) {
   const newCard = cardTemplate.cloneNode(true);
   newCard.querySelector(selectors.cardTextSelector).textContent = name;
-  newCard.querySelector(selectors.cardImageSelector).src = link;
-  newCard.querySelector(selectors.cardImageSelector).alt = `Pic: ${name}`;
+  const img = newCard.querySelector(selectors.cardImageSelector);
+  img.addEventListener("error", () => {
+    img.src = errorImageLink;
+  });
+  img.src = link;
+  img.alt = `Pic: ${name}`;
 
   // Change color of heart on click
   newCard
@@ -212,15 +226,15 @@ document.addEventListener("click", (e) => {
   }
 });
 
-//Close popups by pressing 'Escape'
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    const popup = document.querySelector(selectors.popupIsOpenedSelector);
-    if (popup) {
+//Close popup by pressing 'Escape'
+const closePopupOnEscape = () => {
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      const popup = findElement(document, selectors.popupIsOpenedSelector);
       togglePopup(popup);
     }
-  }
-});
+  });
+};
 
 //Init cards
 initialCards.forEach((item) => renderCard(item.name, item.link));
