@@ -121,6 +121,7 @@ editProfileBtn.addEventListener("click", () => {
   jobProfileInput.value = job.textContent;
   togglePopup(editProfilePopup);
   closePopupOnEscape();
+  enableValidation(settingsObj);
 });
 
 //Open new place popup
@@ -238,7 +239,3 @@ const closePopupOnEscape = () => {
 
 //Init cards
 initialCards.forEach((item) => renderCard(item.name, item.link));
-
-//Make submit button in profile popup enabled after page is loaded
-nameProfileInput.value = name.textContent;
-jobProfileInput.value = job.textContent;

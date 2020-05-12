@@ -67,11 +67,13 @@ const enableValidation = (settings) => {
   });
 };
 
-enableValidation({
+const settingsObj = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".button_save",
   inactiveButtonClass: "button_save-inactive",
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__input-error_active"
-});
+};
+
+enableValidation(settingsObj);
