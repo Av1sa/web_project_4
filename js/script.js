@@ -1,6 +1,6 @@
 import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
-import Utils from "./Utils.js";
+import { findElement, togglePopup } from "./Utils.js";
 
 //Initial cards
 const initialCards = [
@@ -30,153 +30,36 @@ const initialCards = [
   },
 ];
 
-const utils = new Utils();
-
-//Popups
-const editProfilePopup = utils.findElement(
-  document,
-  utils.selectors.profilePopupSelector
-);
-const newPlacePopup = utils.findElement(
-  document,
-  utils.selectors.newPlacePopupSelector
-);
-const imagePopup = utils.findElement(
-  document,
-  utils.selectors.imagePopupSelector
-);
-
-//Buttons
-const editProfileBtn = utils.findElement(
-  document,
-  utils.selectors.editBtnSelector
-);
-const newPlaceBtn = utils.findElement(document, utils.selectors.addBtnSelector);
-const closeEditProfileBtn = utils.findElement(
-  editProfilePopup,
-  utils.selectors.closeBtnSelector
-);
-const closeNewPlaceBtn = utils.findElement(
-  newPlacePopup,
-  utils.selectors.closeBtnSelector
-);
-const saveEditProfileBtn = utils.findElement(
-  editProfilePopup,
-  utils.selectors.saveBtnSelector
-);
-const createNewPlaceBtn = utils.findElement(
-  newPlacePopup,
-  utils.selectors.saveBtnSelector
-);
-const closeImagePopupBtn = utils.findElement(
-  imagePopup,
-  utils.selectors.closeBtnSelector
-);
-
-//Popup Fileds
-const nameProfileInput = utils.findElement(
-  editProfilePopup,
-  utils.selectors.nameInputSelector
-);
-const jobProfileInput = utils.findElement(
-  editProfilePopup,
-  utils.selectors.descInputSelector
-);
-const nameNewPlaceInput = utils.findElement(
-  newPlacePopup,
-  utils.selectors.nameInputSelector
-);
-const linkNewPlaceInput = utils.findElement(
-  newPlacePopup,
-  utils.selectors.linkInputSelector
-);
-
-//Profile fields
-const name = utils.findElement(document, utils.selectors.nameProfileSelector);
-const job = utils.findElement(document, utils.selectors.descProfileSelector);
-
-//Open edit profile popup
-editProfileBtn.addEventListener("click", () => {
-  nameProfileInput.value = name.textContent;
-  jobProfileInput.value = job.textContent;
-  utils.togglePopup(editProfilePopup);
-  closePopupOnEscape();
-  editProfileValidator.enableValidation();
-});
-
-//Open new place popup
-newPlaceBtn.addEventListener("click", () => {
-  utils.togglePopup(newPlacePopup);
-  closePopupOnEscape();
-});
-
-//Close profile popup
-closeEditProfileBtn.addEventListener("click", () => {
-  utils.togglePopup(editProfilePopup);
-});
-
-//Close new place popup
-closeNewPlaceBtn.addEventListener("click", () => {
-  utils.togglePopup(newPlacePopup);
-});
-
-//Close image popup
-closeImagePopupBtn.addEventListener("click", () => {
-  utils.togglePopup(imagePopup);
-});
-
-//Update profile
-saveEditProfileBtn.addEventListener("click", (e) => {
-  name.textContent = nameProfileInput.value;
-  job.textContent = jobProfileInput.value;
-  utils.togglePopup(editProfilePopup);
-  e.preventDefault();
-});
-
-//Create new place
-createNewPlaceBtn.addEventListener("click", (e) => {
-  //renderCard(nameNewPlaceInput.value, linkNewPlaceInput.value);
-  new Card(
-    {
-      name: nameNewPlaceInput.value,
-      link: linkNewPlaceInput.value,
-    },
-    templateCardSelector
-  ).renderCard();
-  utils.togglePopup(newPlacePopup);
-  e.preventDefault();
-});
-
-//Close popups by clicking on overlay
-document.addEventListener("click", (e) => {
-  if (e.target.classList.contains(utils.selectors.popupElementClass)) {
-    utils.togglePopup(e.target, utils.selectors.popupIsOpenedClass);
-    e.preventDefault();
-  }
-});
-
-//Close popup by pressing 'Escape'
-const closePopupOnEscape = () => {
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      const popup = findElement(
-        document,
-        utils.selectors.popupIsOpenedSelector
-      );
-      utils.togglePopup(popup, utils.selectors.popupIsOpenedClass);
-    }
-  });
+//DOM selectors
+const selectors = {
+  cardTemplateSelector: ".template-card",
+  cardElementSelector: ".card",
+  cardsWrapperSelector: ".cards",
+  imagePopupSelector: ".popup_image",
+  profilePopupSelector: ".popup_edit-profile",
+  newPlacePopupSelector: ".popup_new-place",
+  editBtnSelector: ".button_edit",
+  addBtnSelector: ".button_add",
+  closeBtnSelector: ".button_close",
+  saveBtnSelector: ".button_save",
+  likeBtnSelector: ".button_like",
+  likeBlackBtnSelector: "button_like-black",
+  deleteBtnSelector: ".button_delete",
+  nameInputSelector: ".popup__input_name",
+  descInputSelector: ".popup__input_desc",
+  linkInputSelector: ".popup__input_link",
+  nameProfileSelector: ".profile__name",
+  descProfileSelector: ".profile__description",
+  popupElementClass: "popup",
+  popupIsOpenedClass: "popup_is-opened",
+  popupIsOpenedSelector: ".popup_is-opened",
+  cardTextSelector: ".card__text",
+  cardImageSelector: ".card__image",
+  popupImageSelector: ".popup__image",
+  popupImageTitleSelector: ".popup__image-title",
 };
 
-//Init cards
-const templateCardSelector = utils.findElement(
-  document,
-  utils.selectors.cardTemplateSelector
-);
-initialCards.forEach((item) =>
-  new Card(item, templateCardSelector).renderCard()
-);
-
+//DOM selectors for validation
 const settingsObj = {
   inputSelector: ".popup__input",
   submitButtonSelector: ".button_save",
@@ -185,8 +68,140 @@ const settingsObj = {
   errorClass: "popup__input-error_active",
 };
 
+//Popups
+const editProfilePopup = findElement(document, selectors.profilePopupSelector);
+const newPlacePopup = findElement(document, selectors.newPlacePopupSelector);
+const imagePopup = findElement(document, selectors.imagePopupSelector);
+
+//Buttons
+const editProfileBtn = findElement(document, selectors.editBtnSelector);
+const newPlaceBtn = findElement(document, selectors.addBtnSelector);
+const closeEditProfileBtn = findElement(
+  editProfilePopup,
+  selectors.closeBtnSelector
+);
+const closeNewPlaceBtn = findElement(newPlacePopup, selectors.closeBtnSelector);
+const saveEditProfileBtn = findElement(
+  editProfilePopup,
+  selectors.saveBtnSelector
+);
+const createNewPlaceBtn = findElement(newPlacePopup, selectors.saveBtnSelector);
+const closeImagePopupBtn = findElement(imagePopup, selectors.closeBtnSelector);
+
+//Popup Fileds
+const nameProfileInput = findElement(
+  editProfilePopup,
+  selectors.nameInputSelector
+);
+const jobProfileInput = findElement(
+  editProfilePopup,
+  selectors.descInputSelector
+);
+const nameNewPlaceInput = findElement(
+  newPlacePopup,
+  selectors.nameInputSelector
+);
+const linkNewPlaceInput = findElement(
+  newPlacePopup,
+  selectors.linkInputSelector
+);
+
+//Profile fields
+const name = findElement(document, selectors.nameProfileSelector);
+const job = findElement(document, selectors.descProfileSelector);
+
+//Templates
+const templateCardSelector = findElement(
+  document,
+  selectors.cardTemplateSelector
+);
+
+//Containers
+const cardsContainer = findElement(document, selectors.cardsWrapperSelector);
+
+//Validators
 const editProfileValidator = new FormValidator(settingsObj, editProfilePopup);
 const newPlaceValidator = new FormValidator(settingsObj, newPlacePopup);
 
+// Render card
+const renderCard = (data, template) => {
+  cardsContainer.prepend(new Card(data, template).createCard());
+};
+
+//Close popup by pressing 'Escape'
+const closePopupOnEscape = () => {
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      const popup = findElement(document, selectors.popupIsOpenedSelector);
+      togglePopup(popup);
+    }
+  });
+};
+
+//Open edit profile popup
+editProfileBtn.addEventListener("click", () => {
+  nameProfileInput.value = name.textContent;
+  jobProfileInput.value = job.textContent;
+  togglePopup(editProfilePopup);
+  closePopupOnEscape();
+  editProfileValidator.enableValidation();
+});
+
+//Open new place popup
+newPlaceBtn.addEventListener("click", () => {
+  togglePopup(newPlacePopup);
+  closePopupOnEscape();
+});
+
+//Close profile popup
+closeEditProfileBtn.addEventListener("click", () => {
+  togglePopup(editProfilePopup);
+});
+
+//Close new place popup
+closeNewPlaceBtn.addEventListener("click", () => {
+  togglePopup(newPlacePopup);
+});
+
+//Close image popup
+closeImagePopupBtn.addEventListener("click", () => {
+  togglePopup(imagePopup);
+});
+
+//Update profile
+saveEditProfileBtn.addEventListener("click", (e) => {
+  name.textContent = nameProfileInput.value;
+  job.textContent = jobProfileInput.value;
+  togglePopup(editProfilePopup);
+  e.preventDefault();
+});
+
+//Create new place
+createNewPlaceBtn.addEventListener("click", (e) => {
+  renderCard(
+    {
+      name: nameNewPlaceInput.value,
+      link: linkNewPlaceInput.value,
+    },
+    templateCardSelector
+  );
+  togglePopup(newPlacePopup);
+  e.preventDefault();
+});
+
+//Close popups by clicking on overlay
+document.addEventListener("click", (e) => {
+  if (e.target.classList.contains(selectors.popupElementClass)) {
+    togglePopup(e.target);
+    e.preventDefault();
+  }
+});
+
+//Init cards
+initialCards.forEach((item) => renderCard(item, templateCardSelector));
+
+//Validatу forms
 editProfileValidator.enableValidation();
 newPlaceValidator.enableValidation();
+
+export { selectors };

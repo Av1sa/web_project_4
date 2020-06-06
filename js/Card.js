@@ -1,6 +1,5 @@
-import Utils from "./Utils.js";
-
-const utils = new Utils();
+import { errorImageLink, findElement, togglePopup } from "./Utils.js";
+import { selectors } from "./script.js";
 
 export default class Card {
   constructor(data, templateSelector) {
@@ -9,62 +8,67 @@ export default class Card {
     this._template = templateSelector;
   }
 
-  //Add card from template
-  _addCard = (name, link) => {
-    const newCard = this._template.content
-      .querySelector(utils.selectors.cardElementSelector)
-      .cloneNode(true);
-    newCard.querySelector(utils.selectors.cardTextSelector).textContent = name;
-    const img = newCard.querySelector(utils.selectors.cardImageSelector);
-    img.addEventListener("error", () => {
-      img.src = utils.errorImageLink;
-    });
-    img.src = link;
-    img.alt = `Pic: ${name}`;
-
-    // Change color of heart on click
-    newCard
-      .querySelector(utils.selectors.likeBtnSelector)
+  // Change color of heart on click
+  _handleHeartButton = (card) => {
+    card
+      .querySelector(selectors.likeBtnSelector)
       .addEventListener("click", (e) => {
-        e.target.classList.toggle(utils.selectors.likeBlackBtnSelector);
+        e.target.classList.toggle(selectors.likeBlackBtnSelector);
       });
+  };
 
-    // Remove card
-    newCard
-      .querySelector(utils.selectors.deleteBtnSelector)
+  // Remove card
+  _handleDeleteButton = (card) => {
+    card
+      .querySelector(selectors.deleteBtnSelector)
       .addEventListener("click", (e) => {
         e.target.parentElement.remove();
       });
-
-    // Show popup image
-    const popupImageContainer = utils.findElement(
-      document,
-      utils.selectors.imagePopupSelector
-    );
-    newCard
-      .querySelector(utils.selectors.cardImageSelector)
-      .addEventListener("click", (e) => {
-        popupImageContainer.querySelector(
-          utils.selectors.popupImageSelector
-        ).src = link;
-        popupImageContainer.querySelector(
-          utils.selectors.popupImageSelector
-        ).alt = `Pic: ${name}`;
-        popupImageContainer.querySelector(
-          utils.selectors.popupImageTitleSelector
-        ).textContent = name;
-        utils.togglePopup(popupImageContainer);
-      });
-
-    return newCard;
   };
 
-  // Render card
-  renderCard = () => {
-    const cardsContainer = utils.findElement(
+  // Show popup image
+  _handlePopupImage = (card) => {
+    const popupImageContainer = findElement(
       document,
-      utils.selectors.cardsWrapperSelector
+      selectors.imagePopupSelector
     );
-    cardsContainer.prepend(this._addCard(this._name, this._link));
+    card
+      .querySelector(selectors.cardImageSelector)
+      .addEventListener("click", () => {
+        popupImageContainer.querySelector(
+          selectors.popupImageSelector
+        ).src = this._link;
+        popupImageContainer.querySelector(
+          selectors.popupImageSelector
+        ).alt = `Pic: ${name}`;
+        popupImageContainer.querySelector(
+          selectors.popupImageTitleSelector
+        ).textContent = name;
+        togglePopup(popupImageContainer);
+      });
+  };
+
+  //Event listeners for card's buttons
+  _setEventListeners = (card) => {
+    this._handleHeartButton(card);
+    this._handleDeleteButton(card);
+    this._handlePopupImage(card);
+  };
+
+  //Create card from template
+  createCard = () => {
+    const newCard = this._template.content
+      .querySelector(selectors.cardElementSelector)
+      .cloneNode(true);
+    newCard.querySelector(selectors.cardTextSelector).textContent = this._name;
+    const img = newCard.querySelector(selectors.cardImageSelector);
+    img.addEventListener("error", () => {
+      img.src = errorImageLink;
+    });
+    img.src = this._link;
+    img.alt = `Pic: ${this._name}`;
+
+    this._setEventListeners(newCard);
+    return newCard;
   };
 }
