@@ -1,11 +1,20 @@
 export default class FormValidator {
-  constructor(settings, formElement) {
+  constructor(
+    {
+      inputSelector,
+      submitButtonSelector,
+      inactiveButtonClass,
+      inputErrorClass,
+      errorClass,
+    },
+    formElement
+  ){
     this._element = formElement;
-    this._inputSelector = settings.inputSelector;
-    this._submitButtonSelector = settings.submitButtonSelector;
-    this._inactiveButtonClass = settings.inactiveButtonClass;
-    this._inputErrorClass = settings.inputErrorClass;
-    this._errorClass = settings.errorClass;
+    this._inputSelector = inputSelector;
+    this._submitButtonSelector = submitButtonSelector;
+    this._inactiveButtonClass = inactiveButtonClass;
+    this._inputErrorClass = inputErrorClass;
+    this._errorClass = errorClass;
   }
 
   //Show error
@@ -70,7 +79,6 @@ export default class FormValidator {
 
   //Check form
   enableValidation() {
-    //this._element.addEventListener("submit", (e) => e.preventDefault());
     this._setEventListeners();
   }
 }

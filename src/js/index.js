@@ -7,7 +7,6 @@ import UserInfo from "./UserInfo.js";
 
 import "../pages/index.css";
 
-
 //Initial cards
 let cards = [
   {
@@ -36,6 +35,41 @@ let cards = [
   },
 ];
 
+//Initial popup image
+const popupWithImage = new PopupWithImage(".popup_image", {
+  name: "",
+  link: "",
+});
+
+//Initial card list
+const cardList = new Section(
+  {
+    items: cards,
+    renderer: (item) => renderCard(item),
+  },
+  ".cards"
+);
+
+//Render card
+const renderCard = ({ name, link }) => {
+  const card = new Card(
+    {
+      data: { name, link },
+      handleCardClick: ({ name, link }) => {
+        popupWithImage.setFields({ name, link });
+        popupWithImage.setEventListeners();
+        popupWithImage.open();
+      },
+    },
+    ".template-card"
+  );
+  const cardElement = card.generateCard();
+  cardList.addItem(cardElement);
+};
+
+//Initialize cards
+cardList.renderItems();
+
 //DOM selectors for validation
 const settingsObj = {
   inputSelector: ".popup__input",
@@ -48,7 +82,7 @@ const settingsObj = {
 //Profile data
 const userInfo = new UserInfo({
   nameSelector: ".profile__name",
-  jobSelector: ".profile__description",
+  descSelector: ".profile__description",
 });
 
 //Buttons
@@ -57,17 +91,30 @@ const newPlaceBtn = document.querySelector(".button_add");
 
 //Popups
 const editProfilePopup = new PopupWithForm(".popup_edit-profile", {
-  handleFormSubmit: (data) => {
-    userInfo.setUserInfo(data["name-input"], data["desc-input"]);
+  handleFormValidation: () => {
+    editProfileValidator.enableValidation();
   },
-  initialData: userInfo.getUserInfo(),
+  handleFormSubmit: (data) => {
+    userInfo.setUserInfo({
+      name: data["name-input"],
+      desc: data["desc-input"],
+    });
+  },
+  handleInitialData: (form) => {
+    const { name, desc } = userInfo.getUserInfo();
+    form.querySelector(".popup__input_name").value = name;
+    form.querySelector(".popup__input_desc").value = desc;
+  },
 });
 
 const newPlacePopup = new PopupWithForm(".popup_new-place", {
+  handleFormValidation: () => {
+    newPlaceValidator.enableValidation();
+  },
   handleFormSubmit: (data) => {
     renderCard({ name: data["title-input"], link: data["link-input"] });
   },
-  initialData: null,
+  handleInitialData: () => {},
 });
 
 //Validators
@@ -84,45 +131,12 @@ const newPlaceValidator = new FormValidator(
 editProfilePopup.setEventListeners();
 newPlacePopup.setEventListeners();
 
-editProfileBtn.addEventListener("click", (e) => {
+editProfileBtn.addEventListener("click", () => {
   editProfilePopup.open();
   editProfileValidator.enableValidation();
 });
 
-newPlaceBtn.addEventListener("click", (e) => {
+newPlaceBtn.addEventListener("click", () => {
   newPlacePopup.open();
   newPlaceValidator.enableValidation();
 });
-
-//Render card
-const renderCard = ({ name, link }) => {
-  const card = new Card(
-    {
-      data: { name, link },
-      handleCardClick: ({ name, link }) => {
-        const popupWithImage = new PopupWithImage(".popup_image", {
-          name,
-          link,
-        });
-        popupWithImage.setEventListeners();
-        popupWithImage.open();
-      },
-    },
-    ".template-card"
-  );
-  const cardElement = card.generateCard();
-  cardList.addItem(cardElement);
-};
-
-//Initialize cards
-const cardList = new Section(
-  {
-    items: cards,
-    renderer: (item) => renderCard(item),
-  },
-  ".cards"
-);
-
-cardList.renderItems();
-
-export { settingsObj };

@@ -18,16 +18,17 @@ export default class Card {
     return cardElement;
   }
 
-  // Change color of heart on click
+  //Change color of heart on click
   _handleLikeIcon() {
     this._element
       .querySelector(".button_like")
       .classList.toggle("button_like-black");
   }
 
-  // Remove card
+  //Remove card
   _handleDeleteButton() {
     this._element.remove();
+    this._element = null;
   }
 
   //Event listeners
