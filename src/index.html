@@ -18,15 +18,16 @@
     <main>
       <!-- Profile Section -->
       <section class="profile">
-        <img
-          src="./images/cousteau.jpg"
-          alt="Avatar Pic"
-          class="profile__avatar"
-        />
+        <div class="profile__avatar-container">
+          <img alt="Avatar Pic" class="profile__avatar" />
+          <div class="profile__avatar-edit">
+            <img src="../src/images/edit_large_icon.svg" />
+          </div>
+        </div>
         <div class="profile__text-container">
-          <h1 class="profile__name">Jacques Cousteau</h1>
+          <h1 class="profile__name">Loading...</h1>
           <button class="button button_edit"></button>
-          <p class="profile__description">Explorer</p>
+          <p class="profile__description">Loading...</p>
         </div>
         <button class="button button_add"></button>
       </section>
@@ -43,7 +44,7 @@
         <div class="popup popup_edit-profile">
           <div class="popup__container popup__container_form">
             <form class="popup__form" novalidate>
-              <h2 class="popup__title">Edit profile</h2>
+              <h2 class="popup__title">Edit Profile</h2>
               <label class="popup__field">
                 <input
                   type="text"
@@ -68,6 +69,27 @@
                   id="desc-input"
                 />
                 <span class="popup__input-error" id="desc-input-error"></span>
+              </label>
+              <button type="submit" class="button button_save">Save</button>
+            </form>
+            <button class="button button_close"></button>
+          </div>
+        </div>
+
+        <!-- Edit Avatar Form -->
+        <div class="popup popup_edit-avatar">
+          <div class="popup__container popup__container_form">
+            <form class="popup__form" novalidate>
+              <h2 class="popup__title">Change Profile Picture</h2>
+              <label class="popup__field">
+                <input
+                  type="url"
+                  class="popup__input popup__input_avatar"
+                  placeholder="Avatar Link"
+                  required
+                  id="avatar-input"
+                />
+                <span id="avatar-input-error" class="popup__input-error"></span>
               </label>
               <button type="submit" class="button button_save">Save</button>
             </form>
@@ -108,6 +130,23 @@
           </div>
         </div>
 
+        <!-- Confirm Delete Card -->
+        <div class="popup popup_delete-card">
+          <div class="popup__container popup__container_form">
+            <form class="popup__form" novalidate>
+              <h2 class="popup__title">Are You Sure?</h2>
+              <button
+                type="submit"
+                class="button button_save popup__input"
+                id="card_id"
+              >
+                Yes
+              </button>
+            </form>
+            <button class="button button_close"></button>
+          </div>
+        </div>
+
         <!-- Popup Image -->
         <div class="popup popup_image">
           <div class="popup__container">
@@ -130,7 +169,10 @@
         <img class="card__image" />
         <div class="card__text-container">
           <p class="card__text"></p>
-          <button class="button button_like"></button>
+          <div class="card__likes-container">
+            <button class="button button_like"></button>
+            <p class="card__likes-text"></p>
+          </div>
         </div>
         <button class="button button_delete"></button>
       </li>
