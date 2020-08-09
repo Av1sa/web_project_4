@@ -13,13 +13,13 @@ export default class PopupWithImage extends Popup {
   }
 
   open() {
-    this._popupElement.querySelector(".popup__image").src = this._link;
-    this._popupElement.querySelector(
-      ".popup__image"
-    ).alt = `Pic: ${this._caption}`;
-    this._popupElement.querySelector(
+    const popupImage = this._popupElement.querySelector(".popup__image");
+    const popupImageTitle = this._popupElement.querySelector(
       ".popup__image-title"
-    ).textContent = this._caption;
+    );
+    popupImage.src = this._link;
+    popupImage.alt = `Pic: ${this._caption}`;
+    popupImageTitle.textContent = this._caption;
     super.open();
   }
 }

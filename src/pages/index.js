@@ -1,12 +1,12 @@
-import FormValidator from "./FormValidator.js";
-import Card from "./Card.js";
-import Section from "./Section.js";
-import PopupWithImage from "./PopupWithImage.js";
-import PopupWithForm from "./PopupWithForm.js";
-import UserInfo from "./UserInfo.js";
-import Api from "./Api.js";
+import FormValidator from "../components/FormValidator.js";
+import Card from "../components/Card.js";
+import Section from "../components/Section.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api.js";
 
-import "../pages/index.css";
+import "./index.css";
 
 //Init api
 const api = new Api({
@@ -29,7 +29,6 @@ const popupWithImage = new PopupWithImage(".popup_image", {
   name: "",
   link: "",
 });
-
 
 api
   .getAppInfo()
@@ -59,12 +58,10 @@ api
             confirmDeleteCardPopup.open();
           },
           handleLikeIcon: (card) => {
-            let apiMethod;
-            if (card._isLikedByCurrentUser) {
-              apiMethod = "DELETE";
-            } else {
-              apiMethod = "PUT";
-            }
+            let apiMethod = "";
+            card._isLikedByCurrentUser
+              ? (apiMethod = "DELETE")
+              : (apiMethod = "PUT");
             card._isLikedByCurrentUser = !card._isLikedByCurrentUser;
             card._toggleLikeIcon(card._isLikedByCurrentUser);
             api
@@ -110,8 +107,11 @@ api
           .then((card) => {
             cardList.addItem(renderCard(card));
           })
-          .catch((err) => `Error: ${err}`);
-        newPlacePopup.toggleLoading(false);
+          .catch((err) => `Error: ${err}`)
+          .finally(() => {
+            newPlacePopup.toggleLoading(false);
+            newPlacePopup.close();
+          });
       },
       handleInitialData: () => {},
     });
@@ -119,13 +119,18 @@ api
     const confirmDeleteCardPopup = new PopupWithForm(".popup_delete-card", {
       handleFormValidation: () => {},
       handleFormSubmit: (data) => {
-        api.removeCard(data["card_id"]).then(() => {
-          document.getElementById(data["card_id"]).remove();
-        });
+        api
+          .removeCard(data["card_id"])
+          .then(() => {
+            document.getElementById(data["card_id"]).remove();
+          })
+          .finally(() => confirmDeleteCardPopup.close());
       },
       handleInitialData: () => {},
     });
 
+    const editProfileInputName = document.querySelector(".popup__input_name");
+    const editProfileInputAbout = document.querySelector(".popup__input_desc");
     const editProfilePopup = new PopupWithForm(".popup_edit-profile", {
       handleFormValidation: () => {
         editProfileValidator.enableValidation();
@@ -145,16 +150,20 @@ api
               id: res._id,
             })
           )
-          .catch((err) => console.log(`Error: ${err}`));
-        editProfilePopup.toggleLoading(false);
+          .catch((err) => console.log(`Error: ${err}`))
+          .finally(() => {
+            editProfilePopup.toggleLoading(false);
+            editProfilePopup.close();
+          });
       },
-      handleInitialData: (form) => {
+      handleInitialData: () => {
         const { name, about } = userInfo.getUserInfo();
-        form.querySelector(".popup__input_name").value = name;
-        form.querySelector(".popup__input_desc").value = about;
+        editProfileInputName.value = name;
+        editProfileInputAbout.value = about;
       },
     });
 
+    const editAvatarInputPic = document.querySelector(".popup__input_avatar");
     const editAvatarPopup = new PopupWithForm(".popup_edit-avatar", {
       handleFormValidation: () => {
         editAvatarValidator.enableValidation();
@@ -173,13 +182,16 @@ api
               id: res._id,
             });
           })
-          .catch((err) => console.log(`Error: ${err}`));
-        editAvatarPopup.toggleLoading(false);
+          .catch((err) => console.log(`Error: ${err}`))
+          .finally(() => {
+            editAvatarPopup.toggleLoading(false);
+            editAvatarPopup.close();
+          });
       },
 
-      handleInitialData: (form) => {
+      handleInitialData: () => {
         const { avatar } = userInfo.getUserInfo();
-        form.querySelector(".popup__input_avatar").value = avatar;
+        editAvatarInputPic.value = avatar;
       },
     });
 
@@ -227,5 +239,3 @@ api
     });
   })
   .catch((err) => `Error: ${err}`);
-
-

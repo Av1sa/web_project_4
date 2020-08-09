@@ -28,7 +28,7 @@ export default class PopupWithForm extends Popup {
   }
 
   open() {
-    this._handleInitialData(this._form);
+    this._handleInitialData();
     super.open();
   }
 
@@ -38,10 +38,10 @@ export default class PopupWithForm extends Popup {
   }
 
   toggleLoading(isLoading) {
-    let currentText = this._form.querySelector(".button_save").textContent;
+    let saveBtn = this._form.querySelector(".button_save");
     isLoading
-      ? (currentText = "Saving...")
-      : (currentText = this._textSubmitButton);
+      ? (saveBtn.textContent = "Saving...")
+      : (saveBtn.textContent = this._textSubmitButton);
   }
 
   setEventListeners() {
@@ -49,7 +49,6 @@ export default class PopupWithForm extends Popup {
       e.preventDefault();
       this._handleFormValidation();
       this._handleFormSubmit(this.getInputValues());
-      this.close();
     });
     super.setEventListeners();
   }

@@ -10,8 +10,7 @@ export default class Card {
     this._name = data.name;
     this._link = data.link;
     this._id = data._id;
-    this._isCreatedByCurrentUser =
-      data.owner._id === currentUserId ? true : false;
+    this._isCreatedByCurrentUser = data.owner._id === currentUserId;
     this._likes = data.likes.length;
     this._isLikedByCurrentUser = data.likes.some(
       (item) => item._id === currentUserId
